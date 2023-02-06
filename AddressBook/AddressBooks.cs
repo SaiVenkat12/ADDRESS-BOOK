@@ -11,6 +11,7 @@ namespace AddressBook
     internal class AddressBooks
     {
         List<Contact> addressBookList= new List<Contact>();
+        
         public void CreateContact()
         {
             Contact contacts = new Contact();
@@ -109,6 +110,22 @@ namespace AddressBook
                 {
                     Console.WriteLine("No Contact Exists with this First Name : " + firstName);
                 }
+            }
+        }
+        public void AddMultipleContact()
+        {
+            Console.WriteLine("Enter the Number of Contacts to Add : ");
+            int n=Convert.ToInt32(Console.ReadLine());
+            if(n>0)
+            {
+                for (int i = 0; i < n; i++)
+                {
+                    AddContact();
+                }
+            }
+            else
+            {
+                Console.WriteLine("Enter the correct Number");
             }
         }
         public void DeleteContact()
