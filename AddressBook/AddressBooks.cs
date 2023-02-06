@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -53,19 +54,75 @@ namespace AddressBook
             addressBookList.Add(addContact);
             Console.WriteLine("Contact Added Successfully!");
         }
-        public void DisplayContact()
+        public void EditContact()
         {
-            Console.WriteLine("Contact Details");
+            Console.WriteLine("Enter the First Name to Check : ");
+            string firstName = Console.ReadLine();
+            foreach (Contact data in addressBookList)
+            {
+                if (data.firstName == firstName)
+                {
+                    Console.WriteLine("Edit Contact details");
+                    Console.WriteLine("\n1.First Name \n2.Last Name \n3.Address 4.city \n5.state \n6.zip Code \n7.Phone Number \n8.Email");
+                    int choice = Convert.ToInt32(Console.ReadLine());
+                    switch (choice)
+                    {
+                        case 1:
+                            Console.WriteLine("Enter First Name : ");
+                            data.firstName = Console.ReadLine();
+                            break;
+                        case 2:
+                            Console.WriteLine("Enter Last Name");
+                            data.lastName = Console.ReadLine();
+                            break;
+                        case 3:
+                            Console.WriteLine("Enter Address");
+                            data.address = Console.ReadLine();
+                            break;
+                        case 4:
+                            Console.WriteLine("Enter City");
+                            data.city = Console.ReadLine();
+                            break;
+                        case 5:
+                            Console.WriteLine("Enter State");
+                            data.state = Console.ReadLine();
+                            break;
+                        case 6:
+                            Console.WriteLine("Enter Zip Code");
+                            data.zipCode = Convert.ToInt32(Console.ReadLine());
+                            break;
+                        case 7:
+                            Console.WriteLine("Enter Phone Number");
+                            data.phoneNo = Convert.ToInt32(Console.ReadLine());
+                            break;
+                        case 8:
+                            Console.WriteLine("Enter Email");
+                            data.email = Console.ReadLine();
+                            break;
+                        default:
+                            Console.WriteLine("Select Correct number");
+                            break;
+                    }
+                    Console.WriteLine("Contact Edited Successfully");
+                }
+                else
+                {
+                    Console.WriteLine("No Contact Exists with this First Name : " + firstName);
+                }
+            }
+        }
+        public void DisplayContact()
+        {           
             foreach(Contact display in addressBookList)
             {
-                Console.WriteLine(display.firstName);
-                Console.WriteLine(display.lastName);
-                Console.WriteLine(display.email);
-                Console.WriteLine(display.phoneNo);
-                Console.WriteLine(display.address);
-                Console.WriteLine(display.state);
-                Console.WriteLine(display.city);
-                Console.WriteLine(display.zipCode);
+                Console.WriteLine("Contact Details");
+                Console.WriteLine("Name : {0} {1}", display.firstName, display.lastName);
+                Console.WriteLine("Email "+display.email);
+                Console.WriteLine("Phone Number "+display.phoneNo);
+                Console.WriteLine("Address "+display.address);
+                Console.WriteLine("State "+display.state);
+                Console.WriteLine("City "+display.city);
+                Console.WriteLine("ZipCode "+display.zipCode);
             }
         }
     }
