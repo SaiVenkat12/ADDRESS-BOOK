@@ -15,7 +15,7 @@ namespace AddressBook
             bool flag = true;
             while (flag)
             {
-                Console.WriteLine("1.Create Contact \n2.Add Contact \n3.Display Contact \n4.Edit Contact \n22.Exit");
+                Console.WriteLine("1.Create Contact \n2.Add Contact \n3.Display Contact \n4.Edit Contact \n5.Delete Contact \n22.Exit");
                 int choice = Convert.ToInt32(Console.ReadLine());
                 switch (choice)
                 {
@@ -30,6 +30,9 @@ namespace AddressBook
                         break; 
                     case 4:
                         obj.EditContact();
+                        break; 
+                    case 5:
+                        obj.DeleteContact();
                         break;                   
                     case 22:
                         flag = false;

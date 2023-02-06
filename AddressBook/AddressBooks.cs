@@ -111,6 +111,24 @@ namespace AddressBook
                 }
             }
         }
+        public void DeleteContact()
+        {
+            Console.WriteLine("Enter the First Name to Check : ");
+            string firstName = Console.ReadLine();
+            foreach (Contact data in addressBookList)
+            {
+                if (data.firstName == firstName)
+                {
+                    addressBookList.Remove(data);
+                    Console.WriteLine("Contact delete Scccessfully");
+                    return;
+                }
+                else
+                {
+                    Console.WriteLine("No Contact Exists with this First Name : " + firstName);
+                }
+            }
+        }
         public void DisplayContact()
         {           
             foreach(Contact display in addressBookList)
