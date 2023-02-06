@@ -12,7 +12,30 @@ namespace AddressBook
         {
             Console.WriteLine(" Welcome to Address Book Program");
             AddressBooks obj = new AddressBooks();
-            obj.CreateContact();
+            bool flag = true;
+            while (flag)
+            {
+                Console.WriteLine("1.Create Contact \n2.Add Contact \n3.Display Contact \n22.Exit");
+                int choice = Convert.ToInt32(Console.ReadLine());
+                switch (choice)
+                {
+                    case 1:
+                        obj.CreateContact();
+                        break;
+                    case 2:
+                        obj.AddContact();
+                        break;
+                    case 3:
+                        obj.DisplayContact();
+                        break;                   
+                    case 22:
+                        flag = false;
+                        break;
+                    default:
+                        Console.WriteLine("Choose the correct number ! ");
+                        break;
+                }
+            }
             Console.ReadLine();
         }
     }
