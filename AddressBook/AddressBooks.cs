@@ -10,8 +10,8 @@ namespace AddressBook
 {
     internal class AddressBooks
     {
-        List<Contact> addressBookList= new List<Contact>();
-        
+        List<Contact> addressBookList = new List<Contact>();
+        Dictionary<string, List<Contact>> books = new Dictionary<string, List<Contact>>();
         public void CreateContact()
         {
             Contact contacts = new Contact();
@@ -59,12 +59,14 @@ namespace AddressBook
         {
             Console.WriteLine("Enter the First Name to Check : ");
             string firstName = Console.ReadLine();
+            int count = 0;
             foreach (Contact data in addressBookList)
             {
                 if (data.firstName == firstName)
                 {
+                    count++;
                     Console.WriteLine("Edit Contact details");
-                    Console.WriteLine("\n1.First Name \n2.Last Name \n3.Address 4.city \n5.state \n6.zip Code \n7.Phone Number \n8.Email");
+                    Console.WriteLine("\n1.First Name \n2.Last Name \n3.Address \n4.city \n5.state \n6.zip Code \n7.Phone Number \n8.Email");
                     int choice = Convert.ToInt32(Console.ReadLine());
                     switch (choice)
                     {
@@ -105,11 +107,12 @@ namespace AddressBook
                             break;
                     }
                     Console.WriteLine("Contact Edited Successfully");
+                    break;
                 }
-                else
-                {
-                    Console.WriteLine("No Contact Exists with this First Name : " + firstName);
-                }
+            }
+            if (count < 1)
+            {
+                Console.WriteLine("No Contact Exists with this First Name : " + firstName);
             }
         }
         public void AddMultipleContact()
@@ -132,32 +135,82 @@ namespace AddressBook
         {
             Console.WriteLine("Enter the First Name to Check : ");
             string firstName = Console.ReadLine();
+            int count = 0;
             foreach (Contact data in addressBookList)
             {
                 if (data.firstName == firstName)
                 {
                     addressBookList.Remove(data);
                     Console.WriteLine("Contact delete Scccessfully");
-                    return;
-                }
-                else
-                {
-                    Console.WriteLine("No Contact Exists with this First Name : " + firstName);
+                    count++;
+                    break;
                 }
             }
+            if (count < 1)
+            {
+                Console.WriteLine("No Contact Exists with this First Name : " + firstName);
+            }
+
+        }
+        public void CreateAddressBooks()
+        {
+            Console.WriteLine("Enter the Number of Address Book Needed : ");
+            int n= Convert.ToInt32(Console.ReadLine());
+            for(int i=0;i<n;i++)
+            {
+                Console.WriteLine("Enter the Name of Address Book : ");
+                string bookName = Console.ReadLine();
+                AddMultipleContact();
+                books.Add(bookName, addressBookList.ToList());
+                Console.WriteLine("Address Book Created Suceessfully !");
+            }
+        }
+        public void DisplayAddressBooks()
+        {
+            if(books.Count>0)
+            {
+                foreach (var displayBook in books.Keys)
+                {
+                    Console.WriteLine("Address Book Name : " + displayBook);
+                    foreach (Contact display in books[displayBook])
+                    {
+                        Console.WriteLine("Contact Details");
+                        Console.WriteLine("Name : {0} {1}", display.firstName, display.lastName);
+                        Console.WriteLine("Email :" + display.email);
+                        Console.WriteLine("Phone Number : " + display.phoneNo);
+                        Console.WriteLine("Address : " + display.address);
+                        Console.WriteLine("State : " + display.state);
+                        Console.WriteLine("City : " + display.city);
+                        Console.WriteLine("ZipCode : " + display.zipCode);
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("No Address Books Exists !");
+            }
+            
         }
         public void DisplayContact()
-        {           
-            foreach(Contact display in addressBookList)
+        {
+            
+            if(addressBookList.Count > 0) 
             {
-                Console.WriteLine("Contact Details");
-                Console.WriteLine("Name : {0} {1}", display.firstName, display.lastName);
-                Console.WriteLine("Email "+display.email);
-                Console.WriteLine("Phone Number "+display.phoneNo);
-                Console.WriteLine("Address "+display.address);
-                Console.WriteLine("State "+display.state);
-                Console.WriteLine("City "+display.city);
-                Console.WriteLine("ZipCode "+display.zipCode);
+                foreach (Contact display in addressBookList)
+                {
+                    Console.WriteLine("Contact Details");
+                    Console.WriteLine("Name : {0} {1}", display.firstName, display.lastName);
+                    Console.WriteLine("Email : " + display.email);
+                    Console.WriteLine("Phone Number : " + display.phoneNo);
+                    Console.WriteLine("Address : " + display.address);
+                    Console.WriteLine("State : " + display.state);
+                    Console.WriteLine("City : " + display.city);
+                    Console.WriteLine("ZipCode : " + display.zipCode);
+                }
+            }
+            else
+            {
+                Console.WriteLine("No Contacts Exists !");
             }
         }
     }
