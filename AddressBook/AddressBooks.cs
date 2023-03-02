@@ -12,6 +12,8 @@ namespace AddressBook
     {
         List<Contact> addressBookList = new List<Contact>();
         Dictionary<string, List<Contact>> books = new Dictionary<string, List<Contact>>();
+        Dictionary<string, List<Contact>> cityBook = new Dictionary<string, List<Contact>>();
+        Dictionary<string, List<Contact>> stateBook = new Dictionary<string, List<Contact>>();
         public void CreateContact()
         {
             Contact contacts = new Contact();
@@ -38,20 +40,21 @@ namespace AddressBook
             Contact addContact = new Contact();
             Console.WriteLine("Enter First Name : ");
             addContact.firstName = Console.ReadLine();
-            Console.WriteLine("Enter Last Name : ");
-            addContact.lastName = Console.ReadLine();
-            Console.WriteLine("Enter Email : ");
-            addContact.email = Console.ReadLine();
-            Console.WriteLine("Enter Phone Number : ");
-            addContact.phoneNo = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("Enter the Address : ");
-            addContact.address = Console.ReadLine();
+            //Console.WriteLine("Enter Last Name : ");
+            //addContact.lastName = Console.ReadLine();
+            //Console.WriteLine("Enter Email : ");
+            //addContact.email = Console.ReadLine();                   
             Console.WriteLine("Enter State Name : ");
             addContact.state = Console.ReadLine();
             Console.WriteLine("Enter the City Name : ");
             addContact.city = Console.ReadLine();
-            Console.WriteLine("Enter Zip Code : ");
-            addContact.zipCode = Convert.ToInt32(Console.ReadLine());
+            //Console.WriteLine("Enter the Address : ");
+            //addContact.address = Console.ReadLine();
+            //Console.WriteLine("Enter Zip Code : ");
+            //addContact.zipCode = Convert.ToInt32(Console.ReadLine());
+            //Console.WriteLine("Enter Phone Number : ");
+            //addContact.phoneNo = Convert.ToInt32(Console.ReadLine());
+
             addressBookList.Add(addContact);
             Console.WriteLine("Contact Added Successfully!");
         }
@@ -245,6 +248,8 @@ namespace AddressBook
         }
         public void SearchPersonByCityOrState()
         {
+            List<Contact> cityList = new List<Contact>();
+            List<Contact> stateList = new List<Contact>();
             Console.WriteLine("1.Search Person By State\n2.Search Person By City");
             int choice = Convert.ToInt32(Console.ReadLine());
             switch (choice)
@@ -258,13 +263,15 @@ namespace AddressBook
                         Console.WriteLine("Address Book Name: " + key);
                         foreach (var data in addressBookList.FindAll(e => e.state.ToLower() == state.ToLower()))
                         {
+                            stateList.Add(data);
                             Console.WriteLine("The Contacts in the State -" + data.state + "\nName: " + data.firstName + " " + data.lastName + " " + "\nEmail: " + data.email + " " + "\nPhoneNumber: " + data.phoneNo);
                             Count++;
-                            return;
                         }
                     }
                     if (Count <= 0)
                         Console.WriteLine("No Contacts Exists in the State- " + state);
+                    else
+                        stateBook.Add(state, stateList);
                     break;
                 case 2:
                     Console.Write("Enter the city Name : ");
@@ -275,6 +282,7 @@ namespace AddressBook
                         Console.WriteLine("Address Book Name: " + key);
                         foreach (var data in addressBookList.FindAll(e => e.city.ToLower() == city.ToLower()))
                         {
+                            cityList.Add(data);
                             Console.WriteLine("The Contacts in the City -"+data.city+" are"+"\nName: " + data.firstName + " " + data.lastName + " " + "\nEmail: " + data.email + " " + "\nPhoneNumber: " + data.phoneNo);
                             count++;
                             return;
@@ -282,6 +290,8 @@ namespace AddressBook
                     }
                     if (count <= 0)
                         Console.WriteLine("No Contacts Exists in the City- " + city);
+                    else
+                        cityBook.Add(city, cityList);
                     break;                
             }
         }
