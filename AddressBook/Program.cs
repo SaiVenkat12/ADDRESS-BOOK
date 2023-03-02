@@ -15,7 +15,7 @@ namespace AddressBook
             bool flag = true;
             while (flag)
             {
-                Console.WriteLine("\n1.Create Contact \n2.Add Contact \n3.Display Contact \n4.Edit Contact \n5.Delete Contact \n6.Add Multiple Contact \n7.Create Address Book \n8.Display AddressBooks \n9.Check for Duplicate Entry \n10.Search Person by City or State \n11.View Person by City or State \n22.Exit");
+                Console.WriteLine("\n1.Create Contact \n2.Add Contact \n3.Display Contact \n4.Edit Contact \n5.Delete Contact \n6.Add Multiple Contact \n7.Create Address Book \n8.Display AddressBooks \n9.Check for Duplicate Entry \n10.Search Person by City or State \n11.View Person by City or State \n12.Count Contacts by City or State \n22.Exit");
                 int choice = Convert.ToInt32(Console.ReadLine());
                 switch (choice)
                 {
@@ -51,6 +51,9 @@ namespace AddressBook
                         break; 
                     case 11:
                         obj.SearchPersonByCityOrState();
+                        break;
+                    case 12:
+                        obj.CountContactsByCityOrState();
                         break;
                     case 22:
                         flag = false;
