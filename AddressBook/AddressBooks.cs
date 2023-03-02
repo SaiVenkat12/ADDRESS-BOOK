@@ -154,16 +154,18 @@ namespace AddressBook
         }
         public void CreateAddressBooks()
         {
-            Console.WriteLine("Enter the Number of Address Book Needed : ");
-            int n= Convert.ToInt32(Console.ReadLine());
-            for(int i=0;i<n;i++)
-            {
-                Console.WriteLine("Enter the Name of Address Book : ");
-                string bookName = Console.ReadLine();
+            
+            Console.WriteLine("Enter the Name of Address Book : ");
+            string bookName = Console.ReadLine();
+            Console.WriteLine("Enter the Number of Contacts Needed : ");
+            int n = Convert.ToInt32(Console.ReadLine());
+            while(n>0)
+            {                
                 AddMultipleContact();
-                books.Add(bookName, addressBookList.ToList());
-                Console.WriteLine("Address Book Created Suceessfully !");
+                n--;
             }
+            books.Add(bookName, addressBookList.ToList());
+            Console.WriteLine("Address Book Created Suceessfully !");
         }
         public void DisplayAddressBooks()
         {
@@ -211,6 +213,34 @@ namespace AddressBook
             else
             {
                 Console.WriteLine("No Contacts Exists !");
+            }
+        }
+        public void CheckDuplicateEntry()
+        {
+            Console.WriteLine("Enter the First Name to Check : ");
+            string fName = Console.ReadLine();
+            bool fCheck = addressBookList.Any(e => e.firstName.ToLower() == fName.ToLower());
+            if (fCheck)
+            {
+                Console.WriteLine("Enter the Last Name to Check : ");
+                string lName = Console.ReadLine();
+                bool lCheck = addressBookList.Any(e => e.lastName.ToLower() == lName.ToLower());
+                if (lCheck)
+                {
+                    Console.WriteLine("Contact Already Exists\n");
+                }
+                else
+                {
+                    Console.WriteLine("Contact doesn't Exists");
+                    Console.WriteLine("Create New Contact");
+                    AddContact();
+                }
+            }
+            else
+            {
+                Console.WriteLine("Contact doesn't Exists");
+                Console.WriteLine("Create New Contact");
+                AddContact();
             }
         }
     }
