@@ -161,7 +161,7 @@ namespace AddressBook
             int n = Convert.ToInt32(Console.ReadLine());
             while(n>0)
             {                
-                AddMultipleContact();
+                AddContact();
                 n--;
             }
             books.Add(bookName, addressBookList.ToList());
@@ -241,6 +241,48 @@ namespace AddressBook
                 Console.WriteLine("Contact doesn't Exists");
                 Console.WriteLine("Create New Contact");
                 AddContact();
+            }
+        }
+        public void SearchPersonByCityOrState()
+        {
+            Console.WriteLine("1.Search Person By State\n2.Search Person By City");
+            int choice = Convert.ToInt32(Console.ReadLine());
+            switch (choice)
+            {
+                case 1:
+                    Console.Write("Enter the State Name : ");
+                    string state = Console.ReadLine();
+                    int Count = 0;
+                    foreach (var key in books.Keys)
+                    {
+                        Console.WriteLine("Address Book Name: " + key);
+                        foreach (var data in addressBookList.FindAll(e => e.state.ToLower() == state.ToLower()))
+                        {
+                            Console.WriteLine("The Contacts in the State -" + data.state + "\nName: " + data.firstName + " " + data.lastName + " " + "\nEmail: " + data.email + " " + "\nPhoneNumber: " + data.phoneNo);
+                            Count++;
+                            return;
+                        }
+                    }
+                    if (Count <= 0)
+                        Console.WriteLine("No Contacts Exists in the State- " + state);
+                    break;
+                case 2:
+                    Console.Write("Enter the city Name : ");
+                    string city = Console.ReadLine();
+                    int count = 0;
+                    foreach (var key in books.Keys)
+                    {
+                        Console.WriteLine("Address Book Name: " + key);
+                        foreach (var data in addressBookList.FindAll(e => e.city.ToLower() == city.ToLower()))
+                        {
+                            Console.WriteLine("The Contacts in the City -"+data.city+" are"+"\nName: " + data.firstName + " " + data.lastName + " " + "\nEmail: " + data.email + " " + "\nPhoneNumber: " + data.phoneNo);
+                            count++;
+                            return;
+                        }
+                    }
+                    if (count <= 0)
+                        Console.WriteLine("No Contacts Exists in the City- " + city);
+                    break;                
             }
         }
     }
