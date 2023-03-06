@@ -329,18 +329,53 @@ namespace AddressBook
                     break;
             }
         }
-        public void SortPersonUsingName()
+        public void SortContacts()
         {
-            foreach (var book in books)
+            Console.WriteLine("Sort Contacts using \n1.First Name \n2.City \n3.State \n4.Zip");
+            int select = Convert.ToInt32(Console.ReadLine());
+            switch (select)
             {
-                Console.WriteLine("AddressBook Name is: " + book.Key);
-                foreach (var contact in book.Value.OrderBy(e => e.firstName))
-                {
-                    Console.WriteLine("Contact Details:" + "\nFirstName: " + contact.firstName + "\nLastName: " + contact.lastName + "\nAddress: " + contact.address + "\n" + "City: " + contact.city + "\n" + "State: " + contact.state + "\nZip Code: " + contact.zipCode + "\n" + "Phone Number: " + contact.phoneNo + "\n" + "Email: " + contact.email);
-                }
+                case 1:
+                    foreach (var book in books)
+                    {
+                        Console.WriteLine("AddressBook Name is: " + book.Key);
+                        foreach (var contact in book.Value.OrderBy(e => e.firstName))
+                        {
+                            Console.WriteLine("Contact Details:" + "\nFirstName: " + contact.firstName + "\nLastName: " + contact.lastName + "\nAddress: " + contact.address + "\n" + "City: " + contact.city + "\n" + "State: " + contact.state + "\nZip Code: " + contact.zipCode + "\n" + "Phone Number: " + contact.phoneNo + "\n" + "Email: " + contact.email);
+                        }
+                    }
+                    break;
+                case 2:
+                    foreach (var book in books)
+                    {
+                        Console.WriteLine("AddressBook Name is: " + book.Key);
+                        foreach (var contact in book.Value.OrderBy(e => e.city))
+                        {
+                            Console.WriteLine("Contact Details:" + "\nFirstName: " + contact.firstName + "\nLastName: " + contact.lastName + "\nAddress: " + contact.address + "\n" + "City: " + contact.city + "\n" + "State: " + contact.state + "\nZip Code: " + contact.zipCode + "\n" + "Phone Number: " + contact.phoneNo + "\n" + "Email: " + contact.email);
+                        }
+                    }
+                    break;
+                case 3:
+                    foreach (var book in books)
+                    {
+                        Console.WriteLine("AddressBook Name is: " + book.Key);
+                        foreach (var contact in book.Value.OrderBy(e => e.state))
+                        {
+                            Console.WriteLine("Contact Details:" + "\nFirstName: " + contact.firstName + "\nLastName: " + contact.lastName + "\nAddress: " + contact.address + "\n" + "City: " + contact.city + "\n" + "State: " + contact.state + "\nZip Code: " + contact.zipCode + "\n" + "Phone Number: " + contact.phoneNo + "\n" + "Email: " + contact.email);
+                        }
+                    }
+                    break;
+                case 4:
+                    foreach (var book in books)
+                    {
+                        Console.WriteLine("AddressBook Name is: " + book.Key);
+                        foreach (var contact in book.Value.OrderBy(e => e.zipCode))
+                        {
+                            Console.WriteLine("Contact Details:" + "\nFirstName: " + contact.firstName + "\nLastName: " + contact.lastName + "\nAddress: " + contact.address + "\n" + "City: " + contact.city + "\n" + "State: " + contact.state + "\nZip Code: " + contact.zipCode + "\n" + "Phone Number: " + contact.phoneNo + "\n" + "Email: " + contact.email);
+                        }
+                    }
+                    break;
             }
-
-                
         }
     }
 }
