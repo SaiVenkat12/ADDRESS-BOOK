@@ -1,0 +1,16 @@
+Contact Details:
+Name: Abc xyz
+Address: jkla, cja
+City: NYC
+State: MI
+Zip Code: 434342
+Phone Number: 67890123
+Email: ajc@gmaail.co
+Contact Details:
+Name: Pqrs ruy
+Address: dika, dhc
+City: Cl
+State: dl
+Zip Code: 328819
+Phone Number: 78912083
+Email: Phr22y@gmail.com

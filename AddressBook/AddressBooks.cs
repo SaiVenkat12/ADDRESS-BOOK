@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
+using System.IO;
 using System.Linq;
 using System.Runtime.Remoting.Contexts;
 using System.Text;
@@ -42,20 +43,20 @@ namespace AddressBook
             Contact addContact = new Contact();
             Console.WriteLine("Enter First Name : ");
             addContact.firstName = Console.ReadLine();
-            //Console.WriteLine("Enter Last Name : ");
-            //addContact.lastName = Console.ReadLine();
-            //Console.WriteLine("Enter Email : ");
-            //addContact.email = Console.ReadLine();
-            //Console.WriteLine("Enter State Name : ");
-            //addContact.state = Console.ReadLine();
-            //Console.WriteLine("Enter the City Name : ");
-            //addContact.city = Console.ReadLine();
-            //Console.WriteLine("Enter the Address : ");
-            //addContact.address = Console.ReadLine();
-            //Console.WriteLine("Enter Zip Code : ");
-            //addContact.zipCode = Convert.ToInt32(Console.ReadLine());
-            //Console.WriteLine("Enter Phone Number : ");
-            //addContact.phoneNo = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Enter Last Name : ");
+            addContact.lastName = Console.ReadLine();
+            Console.WriteLine("Enter Email : ");
+            addContact.email = Console.ReadLine();
+            Console.WriteLine("Enter State Name : ");
+            addContact.state = Console.ReadLine();
+            Console.WriteLine("Enter the City Name : ");
+            addContact.city = Console.ReadLine();
+            Console.WriteLine("Enter the Address : ");
+            addContact.address = Console.ReadLine();
+            Console.WriteLine("Enter Zip Code : ");
+            addContact.zipCode = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Enter Phone Number : ");
+            addContact.phoneNo = Convert.ToInt32(Console.ReadLine());
 
             addressBookList.Add(addContact);
             Console.WriteLine("Contact Added Successfully!");
@@ -376,6 +377,24 @@ namespace AddressBook
                     }
                     break;
             }
+        }
+        public void ReadAndWriteAddressBookContactsToFile()
+        {
+            string filePath = @"C:\Users\venky\source\Repos2\ADDRESS-BOOK\AddressBook\Files\AddressBookTextFile.txt";
+            StreamWriter write = new StreamWriter(filePath);
+            foreach (var book in books)
+            {
+                write.WriteLine("AddressBook Name : " + book.Key);
+                foreach (var contact in book.Value)
+                {
+                    write.WriteLine("Contact Details:" + "\nName: " + contact.firstName + " " + contact.lastName + "\nAddress: " + contact.address + "\n" + "City: " + contact.city + "\n" + "State: " + contact.state + "\nZip Code: " + contact.zipCode + "\n" + "Phone Number: " + contact.phoneNo + "\n" + "Email: " + contact.email);
+                }
+            }
+            write.Close();
+            StreamReader reader = new StreamReader(filePath);
+            Console.WriteLine(reader.ReadToEnd());
+            reader.Close();
+            Console.WriteLine("Contacts Added to file");
         }
     }
 }
