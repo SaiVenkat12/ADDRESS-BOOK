@@ -15,7 +15,7 @@ namespace AddressBook
             bool flag = true;
             while (flag)
             {
-                Console.WriteLine("\n1.Create Contact \n2.Add Contact \n3.Display Contact \n4.Edit Contact \n5.Delete Contact \n6.Add Multiple Contact \n7.Create Address Book \n8.Display AddressBooks \n9.Check for Duplicate Entry \n10.Search Person by City or State \n11.View Person by City or State \n12.Count Contacts by City or State \n13.Sort Contacts \n14.Read and Write AddressBook Contacts to a File \n22.Exit");
+                Console.WriteLine("\n1.Create Contact \n2.Add Contact \n3.Display Contact \n4.Edit Contact \n5.Delete Contact \n6.Add Multiple Contact \n7.Create Address Book \n8.Display AddressBooks \n9.Check for Duplicate Entry \n10.Search Person by City or State \n11.View Person by City or State \n12.Count Contacts by City or State \n13.Sort Contacts \n14.Read and Write AddressBook Contacts to a File \n15.Read and Write Contacts to a CSV File \n22.Exit");
                 int choice = Convert.ToInt32(Console.ReadLine());
                 switch (choice)
                 {
@@ -60,6 +60,9 @@ namespace AddressBook
                         break;
                     case 14:
                         obj.ReadAndWriteAddressBookContactsToFile();
+                        break;
+                    case 15:
+                        obj.ReadAndWriteCSVFile();
                         break;
                     case 22:
                         flag = false;

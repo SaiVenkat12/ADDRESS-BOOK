@@ -1,6 +1,8 @@
-﻿using System;
+﻿using CsvHelper;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.Remoting.Contexts;
@@ -27,13 +29,13 @@ namespace AddressBook
             Console.WriteLine("Enter Email : ");
             contacts.email = Console.ReadLine();
             Console.WriteLine("Enter Phone Number : ");
-            contacts.phoneNo=Convert.ToInt32(Console.ReadLine());
+            contacts.phoneNo = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("Enter the Address : ");
-            contacts.address=Console.ReadLine();
+            contacts.address = Console.ReadLine();
             Console.WriteLine("Enter State Name : ");
             contacts.state = Console.ReadLine();
             Console.WriteLine("Enter the City Name : ");
-            contacts.city=Console.ReadLine();           
+            contacts.city = Console.ReadLine();
             Console.WriteLine("Enter Zip Code : ");
             contacts.zipCode = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("Contact created");
@@ -124,8 +126,8 @@ namespace AddressBook
         public void AddMultipleContact()
         {
             Console.WriteLine("Enter the Number of Contacts to Add : ");
-            int n=Convert.ToInt32(Console.ReadLine());
-            if(n>0)
+            int n = Convert.ToInt32(Console.ReadLine());
+            if (n > 0)
             {
                 for (int i = 0; i < n; i++)
                 {
@@ -160,13 +162,13 @@ namespace AddressBook
         }
         public void CreateAddressBooks()
         {
-            
+
             Console.WriteLine("Enter the Name of Address Book : ");
             string bookName = Console.ReadLine();
             Console.WriteLine("Enter the Number of Contacts Needed : ");
             int n = Convert.ToInt32(Console.ReadLine());
-            while(n>0)
-            {                
+            while (n > 0)
+            {
                 AddContact();
                 n--;
             }
@@ -175,7 +177,7 @@ namespace AddressBook
         }
         public void DisplayAddressBooks()
         {
-            if(books.Count>0)
+            if (books.Count > 0)
             {
                 foreach (var displayBook in books.Keys)
                 {
@@ -197,12 +199,12 @@ namespace AddressBook
             {
                 Console.WriteLine("No Address Books Exists !");
             }
-            
+
         }
         public void DisplayContact()
         {
-            
-            if(addressBookList.Count > 0) 
+
+            if (addressBookList.Count > 0)
             {
                 foreach (Contact display in addressBookList)
                 {
@@ -395,6 +397,27 @@ namespace AddressBook
             Console.WriteLine(reader.ReadToEnd());
             reader.Close();
             Console.WriteLine("Contacts Added to file");
+        }
+        public void ReadAndWriteCSVFile()
+        {
+            string filepath = @"C:\Users\venky\source\Repos2\ADDRESS-BOOK\AddressBook\Files\ContactsCSVFile.csv";
+            using (StreamWriter writer = new StreamWriter(filepath))
+            {
+                using (CsvWriter csvImport = new CsvWriter(writer, CultureInfo.InvariantCulture))
+                {
+                    csvImport.WriteRecords<Contact>(addressBookList);
+                }
+                writer.Close();
+            }
+            using (StreamReader record = new StreamReader(filepath))
+            using (CsvReader csv = new CsvReader(record, CultureInfo.InvariantCulture))
+            {
+                var item = csv.GetRecords<Contact>();
+                foreach (Contact contact in item)
+                {
+                    Console.WriteLine("Contact Details:" + "\nFirst Name: " + contact.firstName + "\nLast Name: " + contact.lastName + "\nAddress: " + contact.address + "\n" + "City: " + contact.city + "\n" + "State: " + contact.state + "\nZip Code: " + contact.zipCode + "\n" + "Phone Number: " + contact.phoneNo + "\n" + "Email: " + contact.email);
+                }
+            }
         }
     }
 }
