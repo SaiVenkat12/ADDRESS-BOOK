@@ -1,4 +1,5 @@
 ﻿using CsvHelper;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
@@ -417,6 +418,20 @@ namespace AddressBook
                 {
                     Console.WriteLine("Contact Details:" + "\nFirst Name: " + contact.firstName + "\nLast Name: " + contact.lastName + "\nAddress: " + contact.address + "\n" + "City: " + contact.city + "\n" + "State: " + contact.state + "\nZip Code: " + contact.zipCode + "\n" + "Phone Number: " + contact.phoneNo + "\n" + "Email: " + contact.email);
                 }
+            }
+        }
+        public  void ReadWritePersonContactsToJSONFile()
+        {
+            //Write
+            string jsonFilePath = @"C:\Users\venky\source\Repos2\ADDRESS-BOOK\AddressBook\Files\ContactsJsonFile.json";
+            string jsonObject = JsonConvert.SerializeObject(addressBookList);
+            File.WriteAllText(jsonFilePath, jsonObject);
+            //Read
+            string jsonContact = File.ReadAllText(jsonFilePath);
+            List<Contact> jsonList = JsonConvert.DeserializeObject<List<Contact>>(jsonContact);
+            foreach (Contact contact in jsonList)
+            {
+                Console.WriteLine("Contact Details:" + "\nFirst Name: " + contact.firstName + "\nLast Name: " + contact.lastName + "\nAddress: " + contact.address + "\n" + "City: " + contact.city + "\n" + "State: " + contact.state + "\nZip Code: " + contact.zipCode + "\n" + "Phone Number: " + contact.phoneNo + "\n" + "Email: " + contact.email);
             }
         }
     }
